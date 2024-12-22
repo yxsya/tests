@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圣诞快乐 - 登录</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="christmas-bg-decorations"></div>
+    <div class="extra-decorations"></div>
+    <div class="snow"></div>
+    <div class="login-container">
+        <div class="christmas-title">
+            <h1>圣诞快乐</h1>
+            <div class="christmas-decoration">🎄</div>
+        </div>
+        <form class="login-form">
+            <div class="input-group">
+                <input type="text" id="username" required autocomplete="off">
+                <label for="username">用户名</label>
+                <span class="christmas-icon">🎅</span>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" required>
+                <label for="password">密码</label>
+                <span class="christmas-icon">🎁</span>
+            </div>
+            <div class="error-message" id="error-msg"></div>
+            <button type="button" onclick="checkLogin()">登录</button>
+        </form>
+    </div>
+    <script>
+    function checkLogin() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const errorMsg = document.getElementById('error-msg');
+        
+        if(username === 'LZM' && password === '040617') {
+            window.location.href = 'greeting.html';
+        } else {
+            errorMsg.textContent = '用户名或密码错误！';
+            errorMsg.classList.add('show');
+            
+            document.getElementById('password').value = '';
+            
+            setTimeout(() => {
+                errorMsg.classList.remove('show');
+            }, 3000);
+        }
+    }
+    </script>
+</body>
+</html> 

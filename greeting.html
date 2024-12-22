@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圣诞祝福</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2B4865 0%, #256D85 50%, #2B4865 100%);
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .greetings-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .greeting-container {
+            background: rgba(255, 252, 248, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            animation: none;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .greeting-container:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #256D85;
+            font-family: 'Mountains of Christmas', cursive;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.1),
+                0 0 20px rgba(37, 109, 133, 0.2);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .message {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #333;
+            margin: 20px 0;
+            padding: 15px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .greeting-container:hover .message {
+            transform: scale(1.02);
+        }
+
+        .decoration {
+            font-size: 3em;
+            margin: 15px 0;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .special-wish {
+            color: #256D85;
+            font-weight: bold;
+            background: linear-gradient(45deg, #256D85, #3a8ba8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradient 8s ease infinite;
+            text-shadow: none;
+        }
+
+        .photo-wrapper {
+            padding: 10px;
+            background: white;
+            border-radius: 15px;
+            margin-top: 20px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .photo-wrapper:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .special-photo {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        @media screen and (max-width: 480px) {
+            .greeting-container {
+                padding: 20px;
+            }
+            h1 { font-size: 2em; }
+            .message { font-size: 1em; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .heart {
+            display: inline-block;
+            animation: heartBeat 1.5s ease infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* 恢复内层卡片样式 */
+        .inner-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .greeting-container:hover .inner-card {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        /* 特殊消息样式调整 */
+        .final-message {
+            font-size: 1.2em;
+            color: #256D85;
+            font-weight: bold;
+        }
+
+        /* 照片容器调整 */
+        .photo-container .inner-card {
+            padding: 10px;
+        }
+
+        .photo-wrapper {
+            margin: 0;
+            box-shadow: none;
+        }
+
+        /* 媒体查询适配 */
+        @media screen and (max-width: 480px) {
+            .inner-card {
+                padding: 15px;
+            }
+        }
+
+        /* 在style标签中添加滚动提示样式 */
+        .scroll-hint {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 25px;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeInOut 2s ease-in-out infinite;
+            z-index: 100;
+        }
+
+        .scroll-text {
+            color: #256D85;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .scroll-icon {
+            font-size: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-arrow {
+            color: #256D85;
+            font-size: 24px;
+            animation: scrollDown 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollDown {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(8px);
+            }
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0.9;
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* 在较小屏幕上隐藏提示 */
+        @media (max-height: 600px) {
+            .scroll-hint {
+                display: none;
+            }
+        }
+
+        /* 添加圣诞装饰元素 */
+        .christmas-decorations {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* 添加雪花背景 */
+        .snow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MDAgNTAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTAuNywyMy4zYzEuNSwwLDIuOS0wLjYsMy45LTEuNmMxLTEuMSwxLjYtMi40LDEuNi0zLjljMC0xLjUtMC42LTIuOS0xLjYtMy45Yy0xLjEtMS0yLjQtMS42LTMuOS0xLjZjLTEuNSwwLTIuOSwwLjYtMy45LDEuNkM1LjgsMTUsMy44LDE3LjksNC45LDIwLjdDNS40LDIyLjQsNy44LDIzLjMsMTAuNywyMy4zeiIvPjwvc3ZnPg==');
+            animation: snow 10s linear infinite;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        /* 添加装饰元素 */
+        .decoration-item {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        .decoration-item:nth-child(1) { content: '🎄'; top: 10%; left: 5%; font-size: 2.5em; animation-delay: -1s; }
+        .decoration-item:nth-child(2) { content: '🎅'; top: 15%; right: 8%; font-size: 3em; animation-delay: -2s; }
+        .decoration-item:nth-child(3) { content: '🎁'; bottom: 20%; left: 7%; font-size: 2em; animation-delay: -3s; }
+        .decoration-item:nth-child(4) { content: '⭐'; bottom: 25%; right: 6%; font-size: 2.2em; animation-delay: -4s; }
+        .decoration-item:nth-child(5) { content: '🦌'; top: 40%; left: 3%; font-size: 2.3em; animation-delay: -5s; }
+        .decoration-item:nth-child(6) { content: '🔔'; top: 45%; right: 4%; font-size: 2.1em; animation-delay: -6s; }
+
+        /* 添加圣诞彩带 */
+        .ribbon {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 0, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        @keyframes snow {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 500px 1000px;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        /* 移动端适配 */
+        @media screen and (max-width: 768px) {
+            .decoration-item {
+                font-size: 1.5em !important;
+            }
+            
+            .decoration-item:nth-child(1) { left: 2%; }
+            .decoration-item:nth-child(2) { right: 2%; }
+            .decoration-item:nth-child(3) { left: 3%; }
+            .decoration-item:nth-child(4) { right: 3%; }
+            .decoration-item:nth-child(5) { left: 4%; }
+            .decoration-item:nth-child(6) { right: 4%; }
+        }
+
+        /* 添加卡片装饰元素样式 */
+        .card-decorations {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* 卡片角落装饰 */
+        .card-decorations::before,
+        .card-decorations::after {
+            content: '❄️';
+            position: absolute;
+            font-size: 1.5em;
+            opacity: 0.6;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .card-decorations::before {
+            top: 10px;
+            left: 10px;
+        }
+
+        .card-decorations::after {
+            bottom: 10px;
+            right: 10px;
+        }
+
+        /* 添加圣诞铃铛 */
+        .card-bell {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-size: 1.8em;
+            animation: bellRing 3s ease-in-out infinite;
+        }
+
+        /* 添加圣诞树 */
+        .card-tree {
+            position: absolute;
+            bottom: -5px;
+            left: 15px;
+            font-size: 2em;
+            animation: treeGlow 4s ease-in-out infinite;
+        }
+
+        /* 添加动画关键帧 */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        @keyframes bellRing {
+            0%, 100% { transform: rotate(0); }
+            25% { transform: rotate(10deg); }
+            75% { transform: rotate(-10deg); }
+        }
+
+        @keyframes treeGlow {
+            0%, 100% { filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5)); }
+            50% { filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)); }
+        }
+
+        /* 为不同卡片设置不同的装饰 */
+        .greeting-container:nth-child(1) .card-decorations::before { content: '🎄'; }
+        .greeting-container:nth-child(1) .card-decorations::after { content: '🎅'; }
+
+        .greeting-container:nth-child(2) .card-decorations::before { content: '🎁'; }
+        .greeting-container:nth-child(2) .card-decorations::after { content: '⭐'; }
+
+        .greeting-container:nth-child(3) .card-decorations::before { content: '❄️'; }
+        .greeting-container:nth-child(3) .card-decorations::after { content: '🦌'; }
+
+        .greeting-container:nth-child(4) .card-decorations::before { content: '🔔'; }
+        .greeting-container:nth-child(4) .card-decorations::after { content: '🎄'; }
+
+        .greeting-container:nth-child(5) .card-decorations::before { content: '⭐'; }
+        .greeting-container:nth-child(5) .card-decorations::after { content: '🎁'; }
+
+        .greeting-container:nth-child(6) .card-decorations::before { content: '🎅'; }
+        .greeting-container:nth-child(6) .card-decorations::after { content: '❄️'; }
+
+        /* 移动端适配 */
+        @media screen and (max-width: 480px) {
+            .card-decorations::before,
+            .card-decorations::after {
+                font-size: 1.2em;
+            }
+            
+            .card-bell {
+                font-size: 1.5em;
+                right: 10px;
+            }
+            
+            .card-tree {
+                font-size: 1.6em;
+                left: 10px;
+            }
+        }
+
+        /* 添加文字特效样式 */
+        .message {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #333;
+            margin: 20px 0;
+            padding: 15px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        /* 特殊文字效果 */
+        .message-highlight {
+            background: linear-gradient(120deg, #256D85, #3a8ba8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        /* 添加文字阴影效果 */
+        .message-shadow {
+            text-shadow: 1px 1px 2px rgba(37, 109, 133, 0.2);
+        }
+
+        /* 闪烁效果 */
+        .message-sparkle {
+            animation: sparkle 2s infinite;
+            display: inline-block;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { text-shadow: 0 0 4px rgba(37, 109, 133, 0.2); }
+            50% { text-shadow: 0 0 8px rgba(37, 109, 133, 0.4); }
+        }
+
+        /* 修改音乐控制样式 */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 添加提示文字样式 */
+        .music-hint {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #256D85;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .music-hint.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* 移动端适配 */
+        @media screen and (max-width: 480px) {
+            .music-hint {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+
+        /* 添加音乐按钮样式 */
+        .music-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .music-icon {
+            font-size: 20px;
+            animation: rotate 3s linear infinite;
+        }
+
+        .music-btn.paused .music-icon {
+            animation-play-state: paused;
+            opacity: 0.6;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 移动端适配 */
+        @media screen and (max-width: 480px) {
+            .music-btn {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .music-icon {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="bgMusic" loop>
+        <source src="1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="music-control">
+        <div class="music-hint" id="musicHint">点击播放音乐 🎵</div>
+        <button id="musicToggle" class="music-btn">
+            <span class="music-icon">🎵</span>
+        </button>
+    </div>
+
+    <div class="snow"></div>
+    <div class="ribbon"></div>
+    <div class="christmas-decorations">
+        <div class="decoration-item">🎄</div>
+        <div class="decoration-item">🎅</div>
+        <div class="decoration-item">🎁</div>
+        <div class="decoration-item">⭐</div>
+        <div class="decoration-item">🦌</div>
+        <div class="decoration-item">🔔</div>
+    </div>
+
+    <!-- 添加滚动提示 -->
+    <div class="scroll-hint">
+        <div class="scroll-text">
+            <span class="scroll-icon">🎄</span>
+            向下滑动查看更多祝福
+            <span class="scroll-icon">🎁</span>
+        </div>
+        <div class="scroll-arrow">↓</div>
+    </div>
+
+    <div class="greetings-wrapper">
+        <div class="greeting-container">
+            <div class="card-decorations">
+                <span class="card-bell">🔔</span>
+                <span class="card-tree">🎄</span>
+            </div>
+            <div class="decoration">🎄</div>
+            <h1>圣诞快乐！</h1>
+            <div class="inner-card">
+                <div class="message">
+                    <span class="message-highlight">亲爱的梓铭小美女：</span><br><br>
+                    在这个充满魔力的圣诞节，<br>
+                    愿你的每一天都像圣诞节一样温暖，<br>
+                    每一刻都充满欢笑和惊喜！
+                </div>
+            </div>
+        </div>
+
+        <div class="greeting-container">
+            <div class="card-decorations">
+                <span class="card-bell">🔔</span>
+                <span class="card-tree">🎄</span>
+            </div>
+            <div class="decoration">🎁</div>
+            <div class="inner-card">
+                <div class="message">
+                    <div class="special-wish">
+                        愿你的生活甜如圣诞糖果 <span class="heart">❤️</span><br>
+                        愿你的梦想闪耀如圣诞星光 ⭐<br>
+                        愿你的每个愿望都能成真 🎁
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="greeting-container">
+            <div class="card-decorations">
+                <span class="card-bell">🔔</span>
+                <span class="card-tree">🎄</span>
+            </div>
+            <div class="decoration">🎅</div>
+            <div class="inner-card">
+                <div class="message">
+                    记住，你是最特别的那颗星 ✨<br>
+                    愿你的笑容永远如圣诞铃铛般清脆动听 🔔
+                </div>
+            </div>
+        </div>
+
+        <div class="greeting-container">
+            <div class="card-decorations">
+                <span class="card-bell">🔔</span>
+                <span class="card-tree">🎄</span>
+            </div>
+            <div class="decoration">⭐</div>
+            <div class="inner-card">
+                <div class="message">
+                    愿圣诞老人为你带来：<br><br>
+                    <span class="message-sparkle">一箱快乐 📦</span><br>
+                    <span class="message-sparkle">一袋幸福 🎁</span><br>
+                    <span class="message-sparkle">一篮温暖 🧺</span><br>
+                    <span class="message-sparkle">和满满的祝福 💝</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="greeting-container">
+            <div class="card-decorations">
+                <span class="card-bell">🔔</span>
+                <span class="card-tree">🎄</span>
+            </div>
+            <div class="decoration">🦌</div>
+            <div class="inner-card final-message">
+                永远闪耀，永远美丽<br>
+                Merry Christmas! 🎄<br>
+                愿你的圣诞节充满欢乐与惊喜！
+            </div>
+        </div>
+
+        <div class="greeting-container photo-container">
+            <div class="card-decorations">
+                <span class="card-bell">🔔</span>
+                <span class="card-tree">🎄</span>
+            </div>
+            <div class="decoration">💝</div>
+            <div class="inner-card">
+                <div class="message">
+                    <div class="photo-wrapper">
+                        <img src="q.png" alt="圣诞祝福" class="special-photo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 在body结束标签前添加脚本 -->
+    <script>
+        // 控制滚动提示显示和隐藏
+        const scrollHint = document.querySelector('.scroll-hint');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                scrollHint.style.opacity = '0';
+                setTimeout(() => {
+                    scrollHint.style.display = 'none';
+                }, 300);
+            } else {
+                scrollHint.style.display = 'flex';
+                setTimeout(() => {
+                    scrollHint.style.opacity = '1';
+                }, 10);
+            }
+        });
+
+        // 音乐控制
+        const bgMusic = document.getElementById('bgMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        
+        // 自动播放（需要用户交互）
+        document.addEventListener('click', function initAudio() {
+            bgMusic.play().catch(function(error) {
+                console.log("播放失败:", error);
+            });
+            document.removeEventListener('click', initAudio);
+        }, { once: true });
+
+        // 音乐播放/暂停控制
+        musicToggle.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicToggle.classList.remove('paused');
+            } else {
+                bgMusic.pause();
+                musicToggle.classList.add('paused');
+            }
+        });
+
+        // 监听音乐播放状态
+        bgMusic.addEventListener('play', () => {
+            musicToggle.classList.remove('paused');
+        });
+
+        bgMusic.addEventListener('pause', () => {
+            musicToggle.classList.add('paused');
+        });
+
+        // 在现有的音乐控制脚本中添加
+        const musicHint = document.getElementById('musicHint');
+
+        // 显示提示
+        setTimeout(() => {
+            musicHint.classList.add('show');
+        }, 1000);
+
+        // 点击后隐藏提示
+        musicToggle.addEventListener('click', () => {
+            musicHint.classList.remove('show');
+            // ... 原有的播放控制代码 ...
+        });
+
+        // 3秒后自动隐藏提示
+        setTimeout(() => {
+            musicHint.classList.remove('show');
+        }, 4000);
+    </script>
+</body>
+</html> 
